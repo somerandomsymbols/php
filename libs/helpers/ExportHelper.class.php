@@ -142,31 +142,7 @@ class ExportHelper
                     and $zip->addFile($dwlPath, $dstPath))
                     $element->setAttribute('src', $dstPath);
                 else
-                {
-                    echo "<details>";
-
-                    {
-                        echo "REQUEST_URI : {$_SERVER['REQUEST_URI']}<br>";
-
-                        echo "srcLink : $srcUrl<br>";
-
-                        echo "dwlPath : $dwlPath<br>";
-
-                        echo 'mime_content_type : ';
-                        var_dump(mime_content_type($dwlPath));
-                        echo '<br>';
-
-                        echo 'fileExt : ';
-                        var_dump($fileExt);
-                        echo '<br>';
-
-                        echo "dstPath : $dstPath<br>";
-                    }
-
-                    echo "</details>";
-
                     return false;
-                }
             }
 
         return self::saveDomHtml($dom);
