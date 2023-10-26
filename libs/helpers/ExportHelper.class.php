@@ -87,7 +87,7 @@ class ExportHelper
         if (substr($path, 0, 1) != '/')
             $url .= "$reqUri/";
 
-        $url .= $path;
+        $url .= implode('/', array_map('rawurlencode', explode('/', $path)));
 
         return $url;
     }
@@ -108,6 +108,8 @@ class ExportHelper
         if ($curlHandle = curl_init()
             and curl_setopt($curlHandle, CURLOPT_URL, $srcUrl)
             and curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true)
+            and curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, false)
+            and curl_setopt($curlHandle, CURLOPT_SSL_VERIFYHOST, false)
             and $fileContent = curl_exec($curlHandle)
             and !curl_errno($curlHandle)
             and curl_getinfo($curlHandle, CURLINFO_HTTP_CODE) == 200
